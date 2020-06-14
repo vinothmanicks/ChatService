@@ -1,0 +1,26 @@
+<html>
+<body>
+<h1>Calculator</h1>
+<form method="get" onsubmit="handleSubmit()">
+
+    <label for="input1">Input 1: </label>
+    {{#if input1}}
+        <input type="text" id="input1" name="input1" value={{input1}}><br><br>
+    {{else}}
+        <input type="text" id="input1" name="input1"><br><br>
+    {{/if}}
+
+    <label for="input2">Input 2: </label>
+
+        <input type="text" id="input2" name="input2" value={{input2}}><br><br>
+
+
+    <button type="submit">Add</button>
+    <br>
+
+    {{#if sum}}
+        <span>Sum is {{sum}}</span>
+    {{/if}}
+</form>
+</body>
+</html>

@@ -1,13 +1,9 @@
 import com.google.gson.Gson;
 import spark.QueryParamsMap;
-import spark.Request;
-import spark.Response;
 import spark.Route;
 
-import java.util.Map;
-import java.util.Set;
-
-import static spark.Spark.*;
+import static spark.Spark.get;
+import static spark.Spark.post;
 
 public class HelloWorld {
     public static void main(String[] args) {
@@ -17,7 +13,7 @@ public class HelloWorld {
             int a = queryMap.get("a").integerValue();
             int b = queryMap.get("b").integerValue();
             int c = queryMap.get("c").integerValue();
-            return String.format("Sum = %d", a + b+ c);
+            return String.format("Sum = %d", a + b + c);
         };
         get("/hello", helloHandler);
 
@@ -32,11 +28,5 @@ public class HelloWorld {
     class PostHelloWorld {
         public String hello;
     }
-//    static class HelloHandler implements Route{
-//
-//        @Override
-//        public Object handle(Request request, Response response) throws Exception {
-//            return "HelloWorld";
-//        }
-//    }
+
 }
