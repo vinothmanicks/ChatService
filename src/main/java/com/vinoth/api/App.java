@@ -36,6 +36,12 @@ public class App {
 
             return templateEngine.render(new ModelAndView(map, "index.hbs"));
         });
+
+        get("/chat", (request, response) -> {
+            Map<String, Object> map = new HashMap<>();
+
+            return templateEngine.render(new ModelAndView(map, "chat.hbs"));
+        });
     }
 
 }
