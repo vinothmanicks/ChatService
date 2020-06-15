@@ -2,13 +2,14 @@
     <body>
         <h1>Chat Service</h1>
         <form>
-            <textarea name="chatservice" id="history" placeholder="Chat History appears here" rows="10" cols="100" readonly="true">{{chathistory}}</textarea>
+            <textarea name="history" id="history" placeholder="Chat History appears here" rows="10" cols="100" readonly="true">{{history}}</textarea>
 
             <br><br>
 
-            <input type="text" name="chatservice" id="input" width="100">
+            <input type="text" name="input" id="input" width="100">
             <br>
-            <input type="submit" name="chatservice" id="button">
+            <input type="submit" name="op" value="Submit">
+            <input type="submit" name="op" value="Clear History">
         </form>
     </body>
 </html>

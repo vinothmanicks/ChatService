@@ -2,7 +2,9 @@ package com.vinoth.api;
 
 import com.vinoth.api.model.Calculation;
 import com.vinoth.api.model.Calculation.Operation;
+import org.eclipse.jetty.util.StringUtil;
 import spark.ModelAndView;
+import spark.QueryParamsMap;
 import spark.template.handlebars.HandlebarsTemplateEngine;
 
 import java.util.HashMap;
@@ -38,7 +40,30 @@ public class App {
         });
 
         get("/chat", (request, response) -> {
+
+            QueryParamsMap qpm = request.queryMap();
             Map<String, Object> map = new HashMap<>();
+            String input = request.queryMap("input").value();
+            String history = request.queryMap("history").value();
+
+            String op = request.queryMap("op").value();
+
+            if ("Clear History".equals(op)) {
+                history = "";
+                map.put("history", history);
+            }
+
+            else if ("Submit".equals(op)) {
+                if (input != null && !input.isEmpty()) {
+                    if (history.isEmpty()) {
+                        history = input;
+                    } else {
+                        history = history + "\n" + input;
+                    }
+
+                    map.put("history", history);
+                }
+            }
 
             return templateEngine.render(new ModelAndView(map, "chat.hbs"));
         });
