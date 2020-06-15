@@ -2,7 +2,6 @@ package com.vinoth.api;
 
 import com.vinoth.api.model.Calculation;
 import com.vinoth.api.model.Calculation.Operation;
-import org.eclipse.jetty.util.StringUtil;
 import spark.ModelAndView;
 import spark.QueryParamsMap;
 import spark.template.handlebars.HandlebarsTemplateEngine;
@@ -13,6 +12,8 @@ import java.util.Map;
 import static spark.Spark.get;
 
 public class App {
+
+    private static String history = "";
 
     public static void main(String[] args) {
 
@@ -44,7 +45,6 @@ public class App {
             QueryParamsMap qpm = request.queryMap();
             Map<String, Object> map = new HashMap<>();
             String input = request.queryMap("input").value();
-            String history = request.queryMap("history").value();
 
             String op = request.queryMap("op").value();
 
