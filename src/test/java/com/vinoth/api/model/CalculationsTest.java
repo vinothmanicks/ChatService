@@ -13,4 +13,17 @@ public class CalculationsTest {
         assertEquals(result, 3.0, 0.001);
     }
 
+    @Test
+    public void testSubtract(){
+        Calculation calculation = new Calculation(4,2);
+        float result = calculation.performOperation(Calculation.Operation.SUBTRACT);
+        assertEquals(result, 2.0, 0.001);
+    }
+
+    @Test
+    public void testMultiply(){
+        Calculation calculation = new Calculation(1,2);
+        float result = calculation.performOperation(Calculation.Operation.MULTIPLY);
+        assertEquals(result, 2.0, 0.001);
+    }
 }
