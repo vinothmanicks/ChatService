@@ -11,13 +11,16 @@
 
     <input type="text" id="input2" name="input2" value={{input2}}><br><br>
 
+    {{#each operations}}
+        <button type="submit" name="op" value="{{this}}">{{this}}</button>
+    {{/each}}
 
-    <button type="submit">Add</button>
     <br>
 
-    {{#if sum}}
-        <span>Sum is {{sum}}</span>
+    {{#if operationType}}
+        <span>{{operationType}} Result is {{operationResult}}</span>
     {{/if}}
+
 </form>
 </body>
 </html>
