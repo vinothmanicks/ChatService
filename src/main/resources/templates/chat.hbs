@@ -1,11 +1,10 @@
 <html>
     <body>
         <h1>Chat Service</h1>
+        <textarea name="history" id="history" placeholder="Chat History appears here" rows="10" cols="100" readonly="true">{{history}}</textarea>
+        <br><br>
+
         <form>
-            <textarea name="history" id="history" placeholder="Chat History appears here" rows="10" cols="100" readonly="true">{{history}}</textarea>
-
-            <br><br>
-
             <input type="text" name="input" id="input" width="100">
             <br>
             <input type="submit" name="op" value="Submit">
