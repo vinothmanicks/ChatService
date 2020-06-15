@@ -1,0 +1,26 @@
+<html>
+<body>
+<h1>Calculator</h1>
+<form method="get" onsubmit="handleSubmit()">
+
+    <label for="input1">Input 1: </label>
+
+    <input type="text" id="input1" name="input1" value={{input1}}><br><br>
+
+    <label for="input2">Input 2: </label>
+
+    <input type="text" id="input2" name="input2" value={{input2}}><br><br>
+
+    {{#each operations}}
+        <button type="submit" name="op" value="{{this}}">{{this}}</button>
+    {{/each}}
+
+    <br>
+
+    {{#if operationType}}
+        <span>{{operationType}} Result is {{operationResult}}</span>
+    {{/if}}
+
+</form>
+</body>
+</html>
