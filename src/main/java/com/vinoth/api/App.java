@@ -2,6 +2,7 @@ package com.vinoth.api;
 
 import com.vinoth.api.model.Calculation;
 import com.vinoth.api.model.Calculation.Operation;
+import com.vinoth.api.model.HistoryManagement;
 import spark.ModelAndView;
 import spark.QueryParamsMap;
 import spark.template.handlebars.HandlebarsTemplateEngine;
@@ -12,8 +13,6 @@ import java.util.Map;
 import static spark.Spark.get;
 
 public class App {
-
-    private static String history = "";
 
     public static void main(String[] args) {
 
@@ -42,26 +41,23 @@ public class App {
 
         get("/chat", (request, response) -> {
 
-            QueryParamsMap qpm = request.queryMap();
             Map<String, Object> map = new HashMap<>();
-            String input = request.queryMap("input").value();
 
+            String input = request.queryMap("input").value();
             String op = request.queryMap("op").value();
 
+            HistoryManagement.InMemoryChatService history = new HistoryManagement.InMemoryChatService();
+
             if ("Clear History".equals(op)) {
-                history = "";
-                map.put("history", history);
+                history.clearHistory();
+                map.put("history", history.getCompleteHistory());
             }
 
             else if ("Submit".equals(op)) {
                 if (input != null && !input.isEmpty()) {
-                    if (history.isEmpty()) {
-                        history = input;
-                    } else {
-                        history = history + "\n" + input;
-                    }
+                    history.appendMessage(input);
 
-                    map.put("history", history);
+                    map.put("history", history.getCompleteHistory());
                 }
             }
 
