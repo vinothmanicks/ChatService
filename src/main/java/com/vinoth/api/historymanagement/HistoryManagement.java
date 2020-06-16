@@ -14,13 +14,8 @@ public class HistoryManagement {
         }
 
         @Override
-        public void appendMessage(String msg) {
-            history.add(msg);
-        }
-
-        @Override
         public void appendMessage(String userName, String msg) {
-            throw new UnsupportedOperationException("Not implemented in InMemoryChatService class");
+            history.add(msg);
         }
 
         @Override

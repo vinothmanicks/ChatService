@@ -1,5 +1,6 @@
 package com.vinoth.api;
 
+import com.vinoth.api.historymanagement.ChatService;
 import com.vinoth.api.historymanagement.HistoryManagement.InMemoryChatService;
 import com.vinoth.api.model.Calculation;
 import com.vinoth.api.model.Calculation.Operation;
@@ -17,7 +18,7 @@ public class App {
     public static void main(String[] args) {
 
         HandlebarsTemplateEngine templateEngine = new HandlebarsTemplateEngine();
-        InMemoryChatService history = new InMemoryChatService();
+        ChatService history = new InMemoryChatService();
 
         get("/", (request, response) -> {
             Float userInput1 = request.queryMap("input1").floatValue();
@@ -49,16 +50,14 @@ public class App {
 
             if ("Clear History".equals(op)) {
                 history.clearHistory();
-                map.put("history", history.getCompleteHistory());
             }
-
             else if ("Submit".equals(op)) {
                 if (input != null && !input.isEmpty()) {
-                    history.appendMessage(input);
+                    history.appendMessage(null, input);
                 }
-
-                map.put("history", history.getCompleteHistory());
             }
+
+            map.put("history", history.getCompleteHistory());
 
             return templateEngine.render(new ModelAndView(map, "chat.hbs"));
         });
