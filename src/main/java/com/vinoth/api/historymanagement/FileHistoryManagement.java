@@ -3,7 +3,6 @@ package com.vinoth.api.historymanagement;
 import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.util.ArrayList;
 import java.util.List;
 
 public class FileHistoryManagement {
@@ -13,7 +12,11 @@ public class FileHistoryManagement {
         private File filename;
 
         public FileMemoryChatService(String roomName) {
-            filename = new File(String.format("chat_history.%s.data", roomName));
+            File directory = new File("history");
+            if (!directory.exists()) {
+                directory.mkdir();
+            }
+            filename = new File(String.format("history/chat_history.%s.data", roomName));
         }
 
         @Override
@@ -31,34 +34,22 @@ public class FileHistoryManagement {
         public String getCompleteHistory() {
             if (filename.exists() && filename.isFile()) {
 
-                List<String> history;
-
                 try {
-                    history = Files.readAllLines(Paths.get(filename.getPath()));
+                    List<String> history = Files.readAllLines(Paths.get(filename.getPath()));
+                    return String.join("\n", history);
+
                 } catch (IOException e) {
                     throw new UncheckedIOException(e);
                 }
-                return String.join("\n", history);
-            }
-            else if (!filename.exists()) {
-                try (FileWriter fileWriter = new FileWriter(filename, true);
-                     BufferedWriter writer = new BufferedWriter(fileWriter)) {
-                } catch (IOException e) {
-                    throw new UncheckedIOException(e);
-                }
-            }
 
-            /// Fix this
-
-            throw new UnsupportedOperationException("Filename provided is not a file");
+            }
+            return "";
         }
 
         @Override
         public void clearHistory() {
-            try (FileWriter fileWriter = new FileWriter(filename);
-                 BufferedWriter writer = new BufferedWriter(fileWriter)) {
-            } catch (IOException e) {
-                throw new UncheckedIOException(e);
+            if (filename.exists() && filename.isFile()) {
+                filename.delete();
             }
         }
     }

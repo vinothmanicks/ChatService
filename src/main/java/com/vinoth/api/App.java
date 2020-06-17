@@ -1,6 +1,7 @@
 package com.vinoth.api;
 
 import com.vinoth.api.historymanagement.ChatService;
+import com.vinoth.api.historymanagement.FileHistoryManagement;
 import com.vinoth.api.historymanagement.HistoryManagement.InMemoryChatService;
 import com.vinoth.api.model.Calculation;
 import com.vinoth.api.model.Calculation.Operation;
@@ -18,7 +19,7 @@ public class App {
     public static void main(String[] args) {
 
         HandlebarsTemplateEngine templateEngine = new HandlebarsTemplateEngine();
-        ChatService history = new InMemoryChatService();
+        ChatService history = new FileHistoryManagement.FileMemoryChatService("global");
 
         get("/", (request, response) -> {
             Float userInput1 = request.queryMap("input1").floatValue();
